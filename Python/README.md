@@ -31,3 +31,4 @@ want-To-DO-LIST:
 
 --> more recursion and functions, optimizing first codes
 --> fix auction.py
+--> BlackJack mit mehreren Spielern, mit Regeln wie Insurance, mit Einsatz und 6x52 Karten
