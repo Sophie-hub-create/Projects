@@ -42,10 +42,9 @@ while again == True:
     if agree == 'yes':
         
         print(calculating_numbers(number1, number2))
-        again_answer = input("Do you want to calculate something else? Type 'yes' or 'no'  \n")
-        if again_answer == 'no':
-            again == False
-            break
+        if input("Do you want to calculate something else? Type 'yes' or 'no'  \n") == 'no':
+            again = False
+            
     elif agree == 'no':
         print("\nUps, try again and push the run button\n")
         break
