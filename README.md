@@ -29,3 +29,5 @@ passswordGenerator.py: generates passwords based on input (letters, symbols, num
 prime_checker.py: checks wether a number is prime or not
 
 rockscissor.py: little game for rock,scissor, paper
+
+blackjack_version1.py: very simple BlackJack Game
