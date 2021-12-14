@@ -1,4 +1,5 @@
 public class Challenge_varargs {
+    
     public static double average (double... a){
         double average = 0;
         double sum = 0;
