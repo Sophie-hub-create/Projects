@@ -24,7 +24,6 @@ if mode == 'h':
 else:
     maximum = 10
 
-
 while guessed == False or counter <= maximum:
     counter += 1
     begin = int(input("Guess a number between 1 and 100\n"))
