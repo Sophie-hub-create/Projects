@@ -1,5 +1,5 @@
 import random
-from Python.blackjack_art import logo
+from blackjack_art import logo
 
 cards = [11,2,3,4,5,6,7,8,9,10,10,10,10]
 
@@ -15,13 +15,16 @@ beginCountDealer += selectRandom()
 
 print(f"Dealer has {beginCountDealer}\n")
 
-def cards_player():
-    player_count= 0
-    card1_player = selectRandom()
-    print(f"You have got {card1_player}\n")
-    player_count += card1_player
-    again = True
-    while again:
+player_count= 0
+card1_player = selectRandom()
+player_count += card1_player
+card1_player = selectRandom()
+player_count += card1_player
+    
+print(f"You have got {card1_player}\n")
+
+again = True
+while again:
         getCard = input("Do you want get one more card? Type 'y' or 'n'\n")
         if getCard == 'y':
             again = True
@@ -31,11 +34,6 @@ def cards_player():
             print(f"You have got {player_count} on the hand\n")
         else:
             again = False
-            return player_count         
-               
-    return player_count
-        
-    
 
 def cards_dealer():
     dealer_count = 0
@@ -59,6 +57,8 @@ elif score_dealer > 21 and score_player <=21:
     print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
 elif score_dealer <=21 and score_player >21:
     print(f"\nDealer has {score_dealer}, Player has {score_player}\n Dealer WINS, Player Bust")
+elif score_dealer < 21 and score_player <=21 and score_player > score_dealer:
+    print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
 
 
 
