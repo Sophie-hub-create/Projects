@@ -17,3 +17,7 @@ h1 {
 h3 {
     color: blueviolet;
 }
+
+img:hover {
+    background-color: gold;
+}

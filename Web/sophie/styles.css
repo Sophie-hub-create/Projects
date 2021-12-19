@@ -1,5 +1,4 @@
-
-header{
+header {
     width: 300px;
     height: 200px;
     background-color: green;
@@ -10,18 +9,26 @@ section {
     height: 200px;
     background-color: red;
 }
-.about-me{
+
+.about-me {
     width: 300px;
     height: 100px;
     background-color: rgba(142, 57, 223, 0.9);
     margin: 10px;
     border: solid black 2px;
-    border-radius: 5px;;
+    border-radius: 5px;
+    ;
 }
-.motivation{
+
+.motivation {
     width: 270px;
     height: 90px;
 }
+
 #name {
     color: darkgrey;
+}
+
+section:hover {
+    background-color: gold;
 }
