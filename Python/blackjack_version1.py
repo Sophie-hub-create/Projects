@@ -7,24 +7,6 @@ def selectRandom():
     result_rand = random.choice(cards)
     return result_rand
 
-print(logo)
-print("Welcome to BlackJack\n")
-
-beginCountDealer = 0
-beginCountDealer += selectRandom()
-
-print(f"Dealer has {beginCountDealer}\n")
-
-player_count= 0
-card1_player = selectRandom()
-player_count += card1_player
-card1_player = selectRandom()
-player_count += card1_player
-    
-print(f"You have got {card1_player}\n")
-
-again = True
-
 def cards_player():
     player_count= 0
     player_count += beginCountPlayer
@@ -42,7 +24,6 @@ def cards_player():
             print(f"You have got {player_count} on the hand\n")
         else:
             again = False
-
             return player_count
     return player_count
             
@@ -147,14 +128,6 @@ while oneMoreTime:
         oneMoreTime = True
         
 
-if score_dealer > 21 and score_player > 21:
-    print(f"\nDealer has {score_dealer}, Player has {score_player}\n Dealer WINS, Player lost.")
-elif score_dealer > 21 and score_player <=21:
-    print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
-elif score_dealer <=21 and score_player >21:
-    print(f"\nDealer has {score_dealer}, Player has {score_player}\n Dealer WINS, Player Bust")
-elif score_dealer < 21 and score_player <=21 and score_player > score_dealer:
-    print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
 
 
 
