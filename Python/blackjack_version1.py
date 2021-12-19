@@ -43,32 +43,66 @@ def cards_dealer():
 def playerOrDealer(score_dealer, score_player):
     
     if score_dealer > 21 and score_player > 21:
-        print(f"\nDealer has {score_dealer}, Player has {score_player}\n Dealer WINS, Player lost.")
+        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player lost.")
+        return 0
     elif score_dealer > 21 and score_player <= 21:
         print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
+        return 1
     elif score_dealer <=21 and score_player > 21:
         print(f"\nDealer has {score_dealer}, Player has {score_player}\n Dealer WINS, Player Bust")
+        return 0
     elif score_dealer < 21 and score_player < 21 and score_dealer==score_player:
         print(f"\nDealer has {score_dealer}, Player has {score_player}\nNo one wins.")
+        return 2
     elif score_dealer < 21 and score_player < 21 and score_dealer > score_player:
-            print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player Bust")
+        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player Bust")
+        return 0
     elif score_dealer < 21 and score_player < 21 and score_dealer < score_player:
-            print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
+        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
+        return 1
+
+        
+def askOneMoreTime():
+    answer = input("Do you want another Round? type 'y' or 'n': ")
+    if answer == 'y':
+        return 1
+    else:
+        return 0
 
 print(logo)
 print("Welcome to BlackJack\n")
-beginCountDealer = 0
-beginCountDealer += selectRandom()
-print(f"Dealer has {beginCountDealer}\n")
-beginCountPlayer = 0
-beginCountPlayer += selectRandom()
-print(f"You get a {beginCountPlayer}")
-a = selectRandom()
-beginCountPlayer += a
-print(f"You get a {a}, and have {beginCountPlayer} on the hand")
-score_dealer = cards_dealer()
-score_player = cards_player()
-playerOrDealer(score_dealer, score_player)
+playerCash = 1000
+oneMoreTime = True
+b= playerCash
+while oneMoreTime:
+    print("---------------------------------------------------------------------------------------")
+    print(f"You have got {playerCash} Euro\n")
+    beginCountDealer = 0
+    beginCountDealer += selectRandom()
+    print(f"Dealer has {beginCountDealer}\n")
+    beginCountPlayer = 0
+    beginCountPlayer += selectRandom()
+    print(f"You get a {beginCountPlayer}")
+    a = selectRandom()
+    beginCountPlayer += a
+    print(f"You get a {a}, and have {beginCountPlayer} on the hand")
+    givenMoney = int(input("With how much money do you want to get in (min. 100)? "))
+    score_dealer = cards_dealer()
+    score_player = cards_player()
+    a = playerOrDealer(score_dealer, score_player)
+    if a == 0:
+        playerCash -= givenMoney
+    elif a == 1:
+        playerCash += givenMoney
+    elif a == 2:
+        playerCash += 0
+    
+    print (f"You have got {playerCash} Euro")
+    if askOneMoreTime()==0:
+        oneMoreTime = False
+    else:
+        oneMoreTime = True
+        
 
 
 
