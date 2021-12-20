@@ -42,47 +42,48 @@ def cards_dealer():
 
 def playerOrDealer(score_dealer, score_player):
     
-    if score_dealer == 21 and score_player == 21 or score_dealer == score_player:
-        print(f"\nDealer has {score_dealer}, Player has {score_player}\nNO ONE WINS.")
-        return 2
-    elif score_dealer==21:
-        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player lost")
-        return 0
-    elif score_player ==21:
-        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
-        return 3
-    elif score_dealer > score_player:
-        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player lost.")
-        return 0
-    elif score_dealer < score_player:
-        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
-        return 1
-   
-    
-    # if score_dealer > 21 and score_player > 21:
-    #     print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player lost.")
+    # if score_dealer > 21 and score_player>21 :
+    #     print(f"\nDealer has {score_dealer}, Player has {score_player}\nNO ONE WINS.")
+    #     return 2
+    # elif score_dealer==21:
+    #     print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player lost")
     #     return 0
-    # elif score_player == 21:
+    # elif score_player ==21:
     #     print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
     #     return 3
-    # elif score_dealer ==21:
-    #     print(f"\nDealer has {score_dealer}, Player has {score_player}\n Dealer WINS, Player Bust")
+    # elif score_dealer > score_player:
+    #     print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player lost.")
     #     return 0
-    # elif score_dealer < 21 and score_player < 21 and score_dealer==score_player:
-    #     print(f"\nDealer has {score_dealer}, Player has {score_player}\nNo one wins.")
-    #     return 2
-    # elif score_dealer < 21 and score_player < 21 and score_dealer > score_player:
-    #     print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player Bust")
-    #     return 0
-    # elif score_dealer < 21 and score_player < 21 and score_dealer < score_player:
+    # elif score_dealer < score_player:
     #     print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
     #     return 1
-    # elif score_dealer > score_player:
-    #     print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player Bust")
-    #     return 0
-    # elif score_dealer < 21 and score_player>21 and score_player>score_dealer:
-    #     print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player Bust")
-    #     return 0
+   
+    
+    if score_dealer > 21 and score_player > 21:
+        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player lost.")
+        return 0
+    elif score_player == 21:
+        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
+        return 3
+    elif score_dealer ==21:
+        print(f"\nDealer has {score_dealer}, Player has {score_player}\n Dealer WINS, Player Bust")
+        return 0
+    elif score_dealer==score_player:
+        print(f"\nDealer has {score_dealer}, Player has {score_player}\nNo one wins.")
+        return 2
+    elif score_dealer >21:
+        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer Bust, Player WINS")
+        return 1
+    elif score_player > 21 :
+        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player Bust")
+        return 0
+    elif score_dealer > score_player:
+        print(f"\nDealer has {score_dealer}, Player has {score_player}\nDealer WINS, Player Bust")
+        return 0
+    else:
+        print("You lose.")
+        return 0
+  
         
 def askOneMoreTime():
     answer = input("Do you want another Round? type 'y' or 'n': ")
