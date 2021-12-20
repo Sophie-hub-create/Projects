@@ -1,0 +1,35 @@
+div {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+}
+
+.red {
+    background-color: red;
+    top: 200px;
+    left: 200px;
+}
+
+.yellow {
+    background-color: yellow;
+    position: absolute;
+}
+
+.blue {
+    background-color: blue;
+    top: 100px;
+    left: 100px;
+}
+
+.container {
+    height: 200px;
+    width: 400px;
+    background-color: lightgrey;
+    right: 50px;
+    top: 100px;
+    position: fixed;
+}
+
+.insideContainer {
+    background-color: blueviolet;
+}
