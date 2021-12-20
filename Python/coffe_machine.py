@@ -36,10 +36,7 @@ dataMilk = resources["milk"]
 dataCoffee = resources["coffee"]
 money = 0.0
 cost = 0.0   
-quarters= 0
-dimes = 0
-nickles = 0
-pennies = 0
+paid = 0
     
 def report():
     print(f"Water: {dataWater}ml")
@@ -47,6 +44,13 @@ def report():
     print(f"Coffee: {dataCoffee}g")
     print(f"Money: ${money}")
 
+def paying():
+    paid = 0
+    paid+= int(input("how many quarters do you want to pay (0.25)?"))
+    paid+= int(input("how many dimes do you want to pay (0.10)?"))
+    paid += int(input("how many nickles do you want to pay (0.05)?"))
+    paid+= int(input("how many pennies do you want to pay (0.01)?")) 
+    return paid
 
 x = ['espresso', 'latte', 'cappuccino']   
           
@@ -66,30 +70,21 @@ while again:
         dataMilk -= ingredients.get('milk')
         if dataWater <= 0:
             print("Sorry, there's not enough water.")
-          
         if dataMilk <= 0:
-            print("Sorry, there's not enough milk.")
-        
+            print("Sorry, there's not enough milk.")       
         if dataCoffee <= 0:
             print("Sorry, there's not enough coffee.")
-           
         else:
             resources.update({'water': dataWater, 'milk': dataMilk, 'coffee': dataCoffee})
         print(f"Please, pay ${cost}")
         while lowMoney:
-            quarters = int(input("how many quarters do you want to pay (0.25)?"))
-            dimes = int(input("how many dimes do you want to pay (0.10)?"))
-            nickles = int(input("how many nickles do you want to pay (0.05)?"))
-            pennies = int(input("how many pennies do you want to pay (0.01)?"))  
-
-            paid = quarters*0.25+dimes*0.1+nickles*0.05+pennies*0.01
-    
+            paid += paying()   
             if paid < cost:
-                print("Sorry, thats not enough money: Money refunded.")
-              
-            elif paid > cost:
+                print("Sorry, thats not enough money: Money refunded.")    
+                paid = 0          
+            elif paid >= cost:
                 solved =round( paid - cost, 3)
                 print(f"Yout get ${solved} back." )
                 lowMoney= False
-        money += paid
+                money += cost
     
