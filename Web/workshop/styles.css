@@ -10,8 +10,8 @@ section {
 }
 
 article {
-    border: 2px solid rgb(30, 5, 51);
     display: flex;
+    box-shadow: 15px 15px 0px turquoise;
 }
 
 div {}
@@ -41,4 +41,13 @@ div {}
 
 .rechteSeiteText a {
     color: black;
+    display: block;
+    text-align: center;
+    background: turquoise;
+    text-decoration: none;
+    padding: 4% 0;
+    box-shadow: 4px 4px 0px rgb(0, 153, 255);
 }
+
+
+/*a tag inline Element, deswegen auch seperate Zuweisung Farbe, Aenderung durch display: block, wird dann voninline zuu block Element*/
