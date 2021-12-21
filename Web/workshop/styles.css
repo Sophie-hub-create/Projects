@@ -1,0 +1,44 @@
+section {
+    background: linear-gradient(to right, rgb(0, 153, 255), turquoise);
+    /*hinter gradient kein(!) Leerzeichen --> nochmals recherchieren wieso genau und wann*/
+    height: 100vh;
+    font-family: tahoma, geneva, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(30, 5, 51);
+}
+
+article {
+    border: 2px solid rgb(30, 5, 51);
+    display: flex;
+}
+
+div {}
+
+.linkeSeiteBild {
+    width: 60%;
+    background: url(https://images.unsplash.com/photo-1639986587553-1d994ffc66d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
+    /*hier ebenfalls kein Leerzeichen*/
+    background-size: cover;
+    background-position: center;
+}
+
+.rechteSeiteText {
+    width: 40%;
+    background: rgb(198, 252, 252);
+    padding: 5%;
+    /*Vorsichtig, nimmt ggf. zu viel Platz ein*/
+}
+
+.rechteSeiteText h1 {
+    font-size: 100;
+}
+
+.rechteSeiteText p {
+    margin-bottom: 50px;
+}
+
+.rechteSeiteText a {
+    color: black;
+}
