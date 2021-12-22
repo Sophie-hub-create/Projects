@@ -6,8 +6,8 @@ go_on = True
 while go_on:
     question_bank = []
     for i in data.question_data:
-        question_text = i['text']
-        question_answer = i['answer']
+        question_text = i['question']
+        question_answer = i['correct_answer']
         new_question = Question(question_text, question_answer)
         question_bank.append(new_question)
     quiz = Brain(question_bank)
