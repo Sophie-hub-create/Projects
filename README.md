@@ -6,4 +6,4 @@ Until now I have some funny programs in the Python folder, some challenging exer
 
 Feel Welcome to take a look around in here
 
-https://Sophie-create-hub.sophiecreate.repl.co
+https://sophie-create-hub.sophiecreate.repl.co/
