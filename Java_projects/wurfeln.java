@@ -16,20 +16,20 @@ public class wurfeln {
         int counter6 = 0;
         
         for (int i= 0; i<100;i++){
-            int zufallswurf = zufall.nextInt(max+min)+min;
+            int zufallswurf = zufall.nextInt(max)+min;
             switch(zufallswurf){
                 case 1:
-                counter1 ++;
+                counter1++;
                 case 2:
-                counter2 ++;
+                counter2++;
                 case 3:
-                counter3 ++;
+                counter3++;
                 case 4:
-                counter4 ++;
+                counter4++;
                 case 5:
-                counter5 ++;
+                counter5++;
                 case 6:
-                counter6 ++;
+                counter6++;
             }           
         }
         System.out.println(counter1+" "+counter2+" "+counter3+" "+counter4+" "+counter5+" "+counter6);

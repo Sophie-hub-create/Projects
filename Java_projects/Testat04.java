@@ -70,7 +70,7 @@ class FalschAngegebenerBuchstabeException extends Exception {
 
 public class Testat04 {
     public static void main(String[] args) {
-      Queue<ToDoEintrag> toDoListe = new PriorityQueue <ToDoEintrag>();
+        Queue<ToDoEintrag> toDoListe = new PriorityQueue <ToDoEintrag>();
         toDoListe.add(new ToDoEintrag("Muell rausbringen", 'C', 4));
         toDoListe.add(new ToDoEintrag("Hund fuettern", 'A', 2));
         toDoListe.add(new ToDoEintrag("Vogel fuettern", 'B', 7));
