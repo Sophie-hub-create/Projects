@@ -584,7 +584,7 @@ SELECT distinct Projektleiter, Abteilung, EMail , Telefonnummer from Projektmana
 SELECT Projektname , 
 Budget as 'Budget in €', 
 AnzahlMitarbeiter as 'Mitarbeiter',
-((Budget - Budget*0.20)*AnzahlMitarbeiter) as Rückstellungen 
+((Budget *0.2)+2500*AnzahlMitarbeiter) as Rückstellungen 
 from Projektmanagement_1
 order by Rückstellungen asc;
 
@@ -595,6 +595,45 @@ SELECT sum(AnzahlMitarbeiter) from Projektmanagement_1 where PSTart<'2018-02-01'
 --Blatt 3-----------
 
 --Aufgabe 1
+SELECT * from Projektmanagement_1 where Projektname ='PRJ_ManCon';
+
+update Projektmanagement_1
+set PEnde = '2018-07-15', AnzahlMitarbeiter = AnzahlMitarbeiter -1
+where Projektname = 'PRJ_ManCon';
+
+update Projektmanagement_1  set budget= Budget + 50000 where Projektname = 'PRJ_QualFirst';
+
+--Aufgabe 2
+update PROJEKTMANAGEMENT_1 set budget = budget + 15000, PEnde ='2018-10-01' where Projektname = 'PRJ_Car2Fit';
+update Projektmanagement_1 set Projektleiter ='Kilian Meier Hinterhof', EMail = 'K-Meier_Hinterhof@Beispiel.de' where Projektleiter  = 'Kilian Meier';
+
+--Aufgabe 3
+update Projektmanagement_1 set Projektleiter = 'Thomas Förster', EMail = null where Projektleiter = 'Thomas Muster';
+UPDATE Projektmanagement_1 set Budget = Budget - Budget * 0.05 where PEnde > '2018-12-31'or PEnde  is null;
+
+--Aufgabe 4
+update Projektmanagement_1 set budget = (budget *0.95), PEnde = '2018-08-03' where Projektname = 'PRJ_QualFirst';
+UPDATE Projektmanagement_1 set Budget= (Budget + budget*0.1), AnzahlMitarbeiter = (AnzahlMitarbeiter +2), PEnde = '2018-12-31' where Projektname = 'PRJ_FinForce';
+
+SELECT Projektname , 
+Budget as 'Budget in €', 
+AnzahlMitarbeiter as 'Mitarbeiter',
+((Budget *0.2)+2200*AnzahlMitarbeiter) as Rückstellungen 
+from Projektmanagement_1
+order by Rückstellungen asc;
+
+--Blatt 5
+
+--Aufgabe 1
+
+CREATE table Projektleiter_1(
+Projektleiterkuerzel varchar(5) primary key,
+Vorname varchar(30),
+Nachname varchar(30),
+Abteilung varchar(5) check (Abteilung in ('AB_FI', 'AB_PR', 'AB_KT', 'AB_FD', 'AB_QS')),
+EMail varchar(70),
+Telefonnummer char(18)
+);
 
 
 ------AUFGABENSAMMLUNG----------
