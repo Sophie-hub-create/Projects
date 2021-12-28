@@ -225,3 +225,80 @@ stock_quantity||' in stock.' AS 'quantity'
 from books;
 --A Hologram...Dave Eggers 154 in stock.
 
+INSERT INTO books
+    (book_id, title, author_fname, author_lname, released_year, stock_quantity, pages)
+    VALUES (17, '10% Happier', 'Dan', 'Harris', 2014, 29, 256), 
+           (18, 'fake_book', 'Freida', 'Harris', 2001, 287, 428),
+           (19,'Lincoln In The Bardo', 'George', 'Saunders', 2017, 1000, 367);
+          
+SELECT DISTINCT author_lname FROM books;
+select DISTINCT author_fname ||' '|| author_lname as 'full name' from books;
+SELECT author_lname FROM books ORDER BY author_lname desc;
+-- order by default --> asc
+SELECT title FROM books LIMIT 10;
+
+SELECT title, released_year FROM books 
+ORDER BY released_year DESC LIMIT 5;
+
+
+select title, author_fname from books WHERE author_fname LIKE '%da%'
+-- %a% WILDCARD
+
+select title from books where title like '%stor%';
+
+-- %	Ein Ersatz für null oder mehr Zeichen
+--  _	Ein Ersatz für ein einzelnes Zeichen
+---   [ charlist ]	Sets und Zeichenbereiche anzupassen
+---  [^ charlist ]
+---      or
+---   [! charlist ]	Spielen nur ein Zeichen, das nicht in den Klammern angegeben
+
+SELECT title, pages FROM books ORDER BY pages DESC LIMIT 1;
+--> Buch mit den meisten Seiten
+
+select  title ||' - '|| released_year as 'summary' from books order by released_year desc limit 3;
+select title , author_lname from books where author_lname like '% %';
+SELECT title, released_year, stock_quantity from books order by stock_quantity limit 3;
+SELECT title, author_lname from books order by author_lname, title;
+
+SELECT COUNT(*) FROM books;
+SELECT COUNT(DISTINCT author_lname) FROM books;
+SELECT COUNT(*) FROM books WHERE title LIKE '%the%';
+SELECT count(*)as 'anzahl bücher', author_lname From books group by author_lname ;
+
+SELECT TRIM( '     test    ') AS Result;
+--test
+
+select max(pages) as 'max pages', title from books;
+SELECT * FROM books WHERE pages = (SELECT Max(pages) FROM books); 
+--subquery
+SELECT author_fname, 
+       author_lname, 
+       Min(released_year) 
+FROM   books 
+GROUP  BY author_lname, 
+          author_fname; 
+         
+select author_lname as 'Nachname', author_fname as 'Vorname', min(pages) as 'wenigste Seiten' from books group by author_fname, author_lname ;
+SELECT author_fname ||' '|| author_lname as 'full name', max(pages) as 'meiste Seiten' from books group by author_fname, author_lname ;
+SELECT SUM(pages) FROM books;
+
+SELECT author_fname,
+       author_lname,
+       Sum(pages)
+FROM books
+GROUP BY
+    author_lname,
+    author_fname;
+
+SELECT author_fname, author_lname, AVG(pages) FROM books
+GROUP BY author_lname, author_fname;
+
+select count(*) from books;     
+select count(*), released_year from books group by released_year ;    
+select sum (stock_quantity) from books;
+SELECT round(avg(released_year)) , author_fname, author_lname from books group by author_fname, author_lname ;
+select max(pages), author_fname ||' '|| author_lname as 'full name'  from books;
+select released_year, count(released_year), avg(pages) as 'avg pages' from books group by released_year ;
+
+
