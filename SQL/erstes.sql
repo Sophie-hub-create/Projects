@@ -738,7 +738,7 @@ drop table Anmeldungen;
 --??????????-----------------
 select Name||', '||Vorname||
 CASE 
-when “datediff (year, date geburtsdatum, date current_date)> 15
+when datediff (year, date geburtsdatum, date current_date)> 15
 then 'voller Preis'
 else 'halberPreis'
 end as 'Preis'
@@ -760,6 +760,7 @@ SELECT ImkerNummer
 FROM Anmeldungen;
 
 --Lagerbestand
+
 create table Lagerbestand_2(
 ProduktID int primary key,
 Hersteller varchar(50) check(hersteller in('asus', 'intel', 'amd', 'nvidia', 'msi')),
@@ -784,6 +785,8 @@ select Kategorie, Hersteller, cast(Lieferdatum-Bestelldatum as varchar(5)) ||' T
 select Kategorie, Preis, Lieferdatum from Lagerbestand_2 where Kategorie = 'Grafikkarte' and Hersteller ='amd';
 update Lagerbestand_2 set preis = Preis +Preis*0.5;
 update Lagerbestand_2 set anzahl = anzahl-1 where Kategorie = 'Prozessor' and Hersteller = 'intel';
+update Lagerbestand_2 set Lieferdatum = iif(Lieferdatum -2 > Bestelldatum, Lieferdatum, Bestelldatum) where Kategorie = 'Mainboard' and Hersteller ='asus';
+update Lagerbestand_2 set anzahl= anzahl +1 where Kategorie = 'Grafikkarte';
 
 --Helden_1
 create table Helden_1(
@@ -828,11 +831,74 @@ update Helden_1 set Charlevel = round(experiance/1000);
 
 --IIF (<condition>, ResultT, ResultF)
 --select iif( sex = 'M', 'Sir', 'Madam' ) from Customers
+
 UPDATE HELDEN_1 
    SET  LEBENSPUNKTE = iif(LEBENSPUNKTE > 42, Lebenspunkte - 47, -5) 
 WHERE GESINNUNG = 'b';
 
+Select * from Helden_1 where Rucksack like '%Seil%';
+update Helden_1 set Rucksack = 'Trinkschlauch, Schlafrolle' where Spielername = 'Karolin';
+
+--so sollte es
+UPDATE HELDEN_1 
+SET RUCKSACK =  CASE 
+   WHEN Rucksack similar TO 'Seil' THEN ''   --Nur Seil
+   WHEN Rucksack SIMILAR TO 'Seil%' THEN REPLACE(RUCKSACK,'Seil,','') --Seil am Anfang
+   WHEN Rucksack SIMILAR TO '%Seil' THEN REPLACE(RUCKSACK,', Seil','') --Seil am Ende
+   WHEN Rucksack SIMILAR TO '%Seil%' THEN Replace(Rucksack,'Seil,','')  -- Seil in der Mitte
+   end
+WHERE RUCKSACK SIMILAR TO '%Seil%';
+
+update Helden_1 set Charlevel =Charlevel +2 where Spielername = 'Orin';
+select * from Helden_1;
+select Charlevel as 'Level',Gesinnung,  count(Gesinnung)as 'Anzahl' from Helden_1 group by charlevel;
+
+alter table Helden_1 drop Rucksack;
+alter table Helden_1 alter column Experiance to Erfahrungswerte;
+
+create table Rucksack(
+HeldID int references Helden_1(charID),
+Gegenstandsbezeichnung varchar(255),
+Anzahl int check (Anzahl > 0),
+Gewicht dec(8,2) check(Gewicht >= 0)
+);
+
+drop table Rucksack;
+select * from Helden_1;
+
+
+insert into Rucksack ('HeldID', 'Gegenstandsbezeichnung', 'Anzahl', 'Gewicht')
+values
+(1, 'Tarnmantel', 1, 0.5),
+(1, 'Trinkschlauch', 2, 0.2),
+(2, 'Schlafrolle', 3, 0.4),
+(2, 'Pfeile', 22, 0.1),
+(3, 'Seil', 4, 0.2),
+(3, 'Pfeile', 11, 0.1);
+
+select Name, Gegenstandsbezeichnung, Anzahl, Gewicht from Helden_1 , Rucksack on Helden_1.charID = Rucksack.HeldID ;
+
+--KFZ Werkstatt
+
+CREATE TABLE Kundentermine (
+ KName varchar(30),
+ KVorname varchar(30),
+ KGeburtsdatum date,
+ KTelefon varchar(15),
+ KStrasse varchar(30),
+ KHausnummer varchar(5),
+ kOrt varchar(30),
+ KPlz char(5),
+ Dauer int,
+ Termin time,
+ Datum date,
+ Auftrag varchar(15) CHECK (value IN ('Reparatur','Service','Reifenwechsel','Tuev','Sonstiges'));
+)
+
+
+
 --Autovermietung
+
 create table Autovermietung(
 Fahrzeugnummer char(17),
 Mietzaehler int primary key,
@@ -841,7 +907,8 @@ Modell varchar(30),
 Kennzeichen varchar(10) not null,
 KMStand int check(KMStand between 0 and 200000),
 GemietetVon date,
-GemietetBis date check(GemietetBis >= GemietetVon),
+GemietetBis date, 
+--check(GemietetBis >= GemietetVon),
 Mieter varchar(60),
 MieterTelefon char(15),
 MieterGeburtsdatum date  check (current_date - 21*365 >= MieterGeburtsdatum or current_date - 99*365 <=MieterGeburtsdatum)
@@ -861,12 +928,70 @@ INSERT INTO AUTOVERMIETUNG VALUES ('WF00355237A002345', 9, 'OPEL', 'Astra', 'BO-
 INSERT INTO AUTOVERMIETUNG VALUES ('WF00355237A002345', 10, 'OPEL', 'Astra', 'BO-BO 1233', 4217, '22.3.2017', null, 'Thorsten Karter', '+4917324523455',     '13.2.1966');
 
 select sum((GemietetBis-GemietetVon) *45) as 'Abrechnung Mietzeitraum' from Autovermietung group by Mietzaehler;
+
 select Mieter, GemietetVon , GemietetBis 
 from Autovermietung 
 where Kennzeichen = 'BO-DO 4711' 
 and GemietetVon <= '26.03.2017' and GemietetVon >= '01.03.2017'
 or GemietetBis >= '26.3.2017' and GemietetVon <='01.04.2017';
 
+UPDATE AUTOVERMIETUNG SET GEMIETETBIS = '12.4.2018' WHERE GEMIETETBIS IS NULL AND FAHRZEUGNUMMER = 'WDA2300123F140031';
+insert into Autovermietung values ('WDA2300123F140031', 11, 'BMW', '328i', 'BO-DO 4711', 8450, '15.4.2018', null, 'Martin Müller', '+49177533234234', '4.3.1977');
+select * from Autovermietung where Modell = 'Astra';
+update Autovermietung set GemietetBis = '10.4.2018' where GemietetBis is null and Fahrzeugnummer = 'WF00355237A002345';
+insert into Autovermietung values ('WF00355237A002345', 12, 'OPEL', 'Astra', 'BO-BO 1233', 6332, '13.4.2018', null, 'Timo Schulze','17.7.1955', '+491732234244');
+update Autovermietung set MieterTelefon = '+491732234244', MieterGeburtsdatum = '17.7.1955' where Mieter = 'Timo Schulze';
+
+--geht zwar nicht, sollte aber so
+SELECT KENNZEICHEN, EXTRACT (MONTH FROM Gemietetvon) AS 'Monat',count(Kennzeichen) AS 'Anzahl' FROM AUTOVERMIETUNG GROUP BY Kennzeichen;
+
+--Autokunden_0
+
+create table Autokunden_0(
+ID int primary key references Autovermietung (Mietzaehler),
+Name varchar(60),
+--Vorname varchar(60),
+Geburtsdatum date,
+Telefonnummer char(15)
+) ;
+
+drop table Autokunden_0 ;
+
+insert into Autokunden_0 
+(ID, Name, Geburtsdatum, Telefonnummer)
+select
+Mietzaehler, Mieter, MieterGeburtsdatum, Mietertelefon
+from Autovermietung ;
+
+alter table Autovermietung drop MieterTelefon; --ACHTUNG!! löschen geht immer nur einzeln jede Spalte EINZELN
+
+---AUCH das geht wieder nicht in FIREBIRD
+ALTER TABLE Autovermietung
+change Mietzaehler int primary key
+REFERENCES Autokunden_0(ID);
+
+create table Fahrzeuge_1(
+FahrzeugID int primary key references Autovermietung(Mietzaehler),
+Fahrzeugnummer char(17),
+Automarke varchar(30) not null, 
+Modell varchar(30),
+Kennzeichen varchar(10) not null,
+KMStand int check(KMStand between 0 and 200000)
+);
+drop table Fahrzeuge_1 ;
+
+insert into Fahrzeuge_1 (Fahrzeugnummer, Automarke, Modell, Kennzeichen)
+select
+distinct Fahrzeugnummer, Automarke, Modell, Kennzeichen
+from Autovermietung ;
+
+alter table Fahrzeuge_1 add KMEndstand int;
+
+alter table Autovermietung drop Kennzeichen;
+
+select gemietetvon, Kennzeichen, Name 
+from Autovermietung, Autokunden_0 , Fahrzeuge_1 
+where autovermietung.Mietzaehler = fahrzeuge_1.FahrzeugID and autovermietung.Mietzaehler = Autokunden_0.ID;
 
 ------AUFGABENSAMMLUNG----------
 --2.4
@@ -931,3 +1056,4 @@ Klasse char(3) not null constraint UK_01 unique,
 Geburtstag date check (current_date - 6 *365 >= Geburtstag),
 Notiz varchar(255)
 );
+
