@@ -622,6 +622,7 @@ AnzahlMitarbeiter as 'Mitarbeiter',
 from Projektmanagement_1
 order by Rückstellungen asc;
 
+
 -------Blatt 5------------------
 
 --Aufgabe 1
@@ -724,6 +725,149 @@ end as 'Events'
 from Events, Verein 
 on Events.Veranstalter = Verein.id;
 
+--Aufgabe 3
+create table Anmeldungen(
+AnmeldeId int primary key references Event(EventID),
+Name varchar(60),
+Vorname varchar(60),
+EMail varchar(60),
+Geburtsdatum date
+);
+drop table Anmeldungen;
+
+--??????????-----------------
+select Name||', '||Vorname||
+CASE 
+when “datediff (year, date geburtsdatum, date current_date)> 15
+then 'voller Preis'
+else 'halberPreis'
+end as 'Preis'
+from Anmeldungen;
+
+Select Eventname, sum(AnmeldeID) as 'Teilnehmerzahl'
+from Events, Anmeldungen
+on Anmeldungen.AnmeldeID = Events.EventID 
+order by Teilnehmerzahl desc;
+
+alter table Anmeldungen add Mitglied varchar(10) check (Mitglied in('ja', 'nein'));
+alter table Anmeldungen add ImkerNummer int;
+
+alter table Verein add ImkerNummer int;
+
+INSERT INTO Verein
+(ImkerNummer)
+SELECT ImkerNummer
+FROM Anmeldungen;
+
+--Lagerbestand
+create table Lagerbestand_2(
+ProduktID int primary key,
+Hersteller varchar(50) check(hersteller in('asus', 'intel', 'amd', 'nvidia', 'msi')),
+Kategorie varchar(50) check (Kategorie in ('Mainboard', 'Grafikkarte', 'Prozessor')),
+Anzahl int not null,
+Preis decimal(8,2),
+Lieferdatum date,
+Bestelldatum date check(Bestelldatum < Lieferdatum)
+);
+
+INSERT INTO Lagerbestand_2 VALUES (1, 'asus', 'Mainboard', 4, 245.00, '2019-02-22', '2019-01-05');
+INSERT INTO Lagerbestand_2 VALUES (2, 'asus', 'Mainboard', 4, 300.00, '2018-04-23', '2018-02-10');
+INSERT INTO Lagerbestand_2 VALUES (3, 'intel', 'Mainboard', 4, 299.99, '2018-12-22', '2018-12-05');
+INSERT INTO Lagerbestand_2 VALUES (4, 'intel', 'Prozessor', 4, 145.00, '2019-01-02', '2018-12-20');
+INSERT INTO Lagerbestand_2 VALUES (5, 'intel', 'Prozessor', 4, 499.00, '2019-02-22', '2019-01-05');
+INSERT INTO Lagerbestand_2 VALUES (6, 'intel', 'Grafikkarte', 4, 899.99, '2019-02-22', '2019-01-05');
+INSERT INTO Lagerbestand_2 VALUES (7, 'intel', 'Grafikkarte', 4, 249.50, '2017-07-30', '2017-07-20');
+INSERT INTO Lagerbestand_2 VALUES (8, 'amd', 'Grafikkarte', 2, 149.50, '2019-01-30', '2019-01-20');
+
+select Kategorie,Hersteller, Preis, (Preis-Preis*0.19) as 'Nettopreis', (Preis*0.19) as 'MwSt.' from Lagerbestand_2 order by Kategorie ;
+select Kategorie, Hersteller, cast(Lieferdatum-Bestelldatum as varchar(5)) ||' Tage' as Lieferzeit from Lagerbestand_2;
+select Kategorie, Preis, Lieferdatum from Lagerbestand_2 where Kategorie = 'Grafikkarte' and Hersteller ='amd';
+update Lagerbestand_2 set preis = Preis +Preis*0.5;
+update Lagerbestand_2 set anzahl = anzahl-1 where Kategorie = 'Prozessor' and Hersteller = 'intel';
+
+--Helden_1
+create table Helden_1(
+charID int primary key,
+Name varchar (60) not null,
+Spielername varchar (60),
+Charlevel int check (Charlevel between 1 and 99),
+Gesinnung char(1) check(Gesinnung in ('g','n','b')),
+Experiance int,
+Staerke int,
+Gewandtheit int,
+Geisteskraft int,
+Zauberkraft int,
+Heimlichkeit int,
+Angriffskraft int,
+Rechtehand varchar(60),
+Linkehand varchar (60),
+Kleidung varchar (60) check(Kleidung in('Robe','Lederruestung', 'Kettenhemd','Plattenruestung')),
+Rucksack varchar (255),
+Lebenspunkte int check(Lebenspunkte BETWEEN -10 and 100),
+Mana int
+);
+
+drop table Helden_1 ;
+
+
+INSERT INTO HELDEN_1 (CHARID, NAME, CHARLEVEL, STAERKE, GEWANDTHEIT, GEISTESKRAFT, ANGRIFFSKRAFT, RECHTEHAND, LINKEHAND, KLEIDUNG, LEBENSPUNKTE)
+VALUES(1,'Krall', 1, 12, 8, 4, 10, 'Langschwert', 'Schild', 'Kettenhemd', 100);
+INSERT INTO HELDEN_1 (CHARID, NAME, SPIELERNAME,CHARLEVEL, EXPERIANCE, STAERKE, GEWANDTHEIT, GEISTESKRAFT, ZAUBERKRAFT, HEIMLICHKEIT, RECHTEHAND, KLEIDUNG,RUCKSACK, LEBENSPUNKTE, MANA)
+VALUES(2,'Tarina', 'Karolin', 3, 4300, 3, 11,16,13, 11, 'Zauberschwert', 'Lederruestung', 'Seil, Trinkschlauch, Schlafrolle', 66,20);
+INSERT INTO HELDEN_1 (CHARID, name, SPIELERNAME, CHARLEVEL, GESINNUNG, EXPERIANCE, STAERKE, GEWANDTHEIT, GEISTESKRAFT, ANGRIFFSKRAFT, ZAUBERKRAFT,
+HEIMLICHKEIT, RECHTEHAND, LINKEHAND, KLEIDUNG, RUCKSACK, LEBENSPUNKTE, MANA)
+VALUES (3, 'Torin', 'Orin', 5, 'b', 50, 20, 60, 25, 40, 45, 35, 'Axt', 'Boblinbogen', 'Plattenruestung', 'Tarnmantel, Pfeile', 99, 30);
+
+SELECT Name, Charlevel, Spielername from Helden_1 ;
+Select Name, Lebenspunkte, Gewandtheit from Helden_1 order by Gewandtheit ;
+SELECT NAME, ROUND(ANGRIFFSKRAFT * rand()*10) AS Angriff FROM HELDEN_1 WHERE NAME = 'Krall';
+update Helden_1 set Gesinnung = 'n' where Gesinnung is null;
+select*from Helden_1 ;
+update Helden_1 set Experiance = iif(Experiance is null, 7500, experiance+7500);
+update Helden_1 set Charlevel = round(experiance/1000);
+
+--IIF (<condition>, ResultT, ResultF)
+--select iif( sex = 'M', 'Sir', 'Madam' ) from Customers
+UPDATE HELDEN_1 
+   SET  LEBENSPUNKTE = iif(LEBENSPUNKTE > 42, Lebenspunkte - 47, -5) 
+WHERE GESINNUNG = 'b';
+
+--Autovermietung
+create table Autovermietung(
+Fahrzeugnummer char(17),
+Mietzaehler int primary key,
+Automarke varchar(30) not null, 
+Modell varchar(30),
+Kennzeichen varchar(10) not null,
+KMStand int check(KMStand between 0 and 200000),
+GemietetVon date,
+GemietetBis date check(GemietetBis >= GemietetVon),
+Mieter varchar(60),
+MieterTelefon char(15),
+MieterGeburtsdatum date  check (current_date - 21*365 >= MieterGeburtsdatum or current_date - 99*365 <=MieterGeburtsdatum)
+);
+
+drop table Autovermietung;
+
+INSERT INTO AUTOVERMIETUNG VALUES ('WDA2300123F140031', 1, 'BMW', '328i', 'BO-DO 4711', 6000, '3.3.2017', '5.3.2017', 'Frank Meier', '+491774563534',     '3.6.1966');
+INSERT INTO AUTOVERMIETUNG VALUES ('WDA2300123F140031', 2, 'BMW', '328i', 'BO-DO 4711', 6600, '11.2.2017', '18.2.2017', 'Tina Winter', '+49173562727',     '6.11.1972');
+INSERT INTO AUTOVERMIETUNG VALUES ('WDA2300123F140031', 3, 'BMW', '328i', 'BO-DO 4711', 6850, '16.3.2017', '22.3.2017', 'Oliver Klein', '+49172632345',     '23.4.1947');
+INSERT INTO AUTOVERMIETUNG VALUES ('WDA2300123F140031', 5, 'BMW', '328i', 'BO-DO 4711', 7302, '24.3.2017', '29.3.2017', 'Mika Marten', '+4917983392',     '13.3.1939');
+INSERT INTO AUTOVERMIETUNG VALUES ('WDA2300123F140031', 6, 'BMW', '328i', 'BO-DO 4711', 7566, '30.1.2017', '8.2.2017', 'Tom Walter', '+49176332472',     '25.4.1984');
+INSERT INTO AUTOVERMIETUNG VALUES ('WDA2300123F140031', 7, 'BMW', '328i', 'BO-DO 4711', 8033, '4.4.2017', '5.4.2017', 'Seth Brinkman', '+491723453',     '9.7.1976');
+INSERT INTO AUTOVERMIETUNG VALUES ('WDA2300123F140031', 8, 'BMW', '328i', 'BO-DO 4711', 8120, '7.4.2017',null, 'Lara Thoma', '+4917533453534',     '12.12.1969');
+INSERT INTO AUTOVERMIETUNG VALUES ('WF00355237A002345', 4, 'OPEL', 'Astra', 'BO-BO 1233', 3310, '4.3.2017', '7.3.2017', 'Tom Walter', '+49176332472',     '25.4.1984');
+INSERT INTO AUTOVERMIETUNG VALUES ('WF00355237A002345', 9, 'OPEL', 'Astra', 'BO-BO 1233', 3610, '11.3.2017', '17.3.2017', 'Martha Klein', '+491792342534',     '11.8.1978');
+INSERT INTO AUTOVERMIETUNG VALUES ('WF00355237A002345', 10, 'OPEL', 'Astra', 'BO-BO 1233', 4217, '22.3.2017', null, 'Thorsten Karter', '+4917324523455',     '13.2.1966');
+
+select sum((GemietetBis-GemietetVon) *45) as 'Abrechnung Mietzeitraum' from Autovermietung group by Mietzaehler;
+select Mieter, GemietetVon , GemietetBis 
+from Autovermietung 
+where Kennzeichen = 'BO-DO 4711' 
+and GemietetVon <= '26.03.2017' and GemietetVon >= '01.03.2017'
+or GemietetBis >= '26.3.2017' and GemietetVon <='01.04.2017';
+
+
 ------AUFGABENSAMMLUNG----------
 --2.4
 create table Schueler_0(
@@ -787,4 +931,3 @@ Klasse char(3) not null constraint UK_01 unique,
 Geburtstag date check (current_date - 6 *365 >= Geburtstag),
 Notiz varchar(255)
 );
-
