@@ -622,19 +622,107 @@ AnzahlMitarbeiter as 'Mitarbeiter',
 from Projektmanagement_1
 order by Rückstellungen asc;
 
---Blatt 5
+-------Blatt 5------------------
 
 --Aufgabe 1
-
 CREATE table Projektleiter_1(
 Projektleiterkuerzel varchar(5) primary key,
 Vorname varchar(30),
 Nachname varchar(30),
-Abteilung varchar(5) check (Abteilung in ('AB_FI', 'AB_PR', 'AB_KT', 'AB_FD', 'AB_QS')),
 EMail varchar(70),
-Telefonnummer char(18)
+Telefonnummer char(18),
+Abteilung varchar(5) check (Abteilung in ('AB_FI', 'AB_PR', 'AB_KT', 'AB_FD', 'AB_QS')), foreign key(Abteilung) references Projektmanagement_1(Projektsponsor)
 );
 
+drop table Projektleiter_1 ;
+
+insert into Projektleiter_1(Projektleiterkuerzel, Vorname, Nachname, Abteilung, EMail, Telefonnummer)
+values
+(null, 'Thomas', 'Förster', 'AB_FD', null, null),
+(null, 'Kilian', 'Meier Hinterhof', 'AB_FI', 'K-Meier_Hinterhof@Beispiel.de', '+49 555 2747'),
+(null, 'Frank', 'Meier', 'AB_QS', 'F.Meier@Beispiel.de', '+49 555 6263'),
+(null, 'Thomas', 'Förster', 'AB_KT', null, null),
+(null, 'Kilian', 'Meier Hinterhof', 'AB_FD', 'K-Meier_Hinterhof@Beispiel.de', '+49 555 2747');
+
+alter table Projektmanagement_1 drop Telefonnummer;
+
+--Aufgabe 2
+Select Projektname,(Vorname||' '||Nachname) as 'Projektleiter', Budget, AnzahlMitarbeiter from Projektmanagement_1, Projektleiter_1 
+on Projektmanagement_1.Projektsponsor = Projektleiter_1.Abteilung
+group by Projektname
+order by Budget;
+
+--Aufgabe 3
+alter table Projektleiter_1 alter Telefonnummer char(18) check(Telefonnummer similar to '+49%')
+
+--Aufgabe 4
+alter table Projektleiter_1 add Raum char(8) check (Raum similar to '([ABEGZ]{1}\-[0-1][0-9].*{3})');
+update Projektleiter_1  set Raum....
+
+------Blatt 6------------
+
+--Aufgabe 1
+create table Verein(
+id int primary key,
+Name varchar(30),
+Vorname varchar(30),
+Geburtsdatum date,
+Postanschrift varchar(80),
+Telefonnummer varchar(20),
+EMail varchar(60),
+Betrittsjahr int, 
+AnzahlBienenvölker int
+);
+drop table Verein;
+
+INSERT INTO Verein VALUES (1,'Meier', 'Thomas','02.01.1955','Baum Str. 5,
+52557 Domstadt', '+4945557372','T.Meier@mail.de','01.01.2005', 2);
+
+insert into verein (id, Name, Vorname, Geburtsdatum, Postanschrift, Telefonnummer, EMail, Betrittsjahr, AnzahlBienenvölker)
+values
+(2,'Walter', 'Imke', '03.05.1950', 'Mustermannstr. 18, 123456 Regensburg', '+4932984745', 'I.Walter@Beispiel.de', '01.01.2003', 4 ),
+(3,'Jacobi', 'Wilhelm', '08.04.1975', 'Gagarinstr. 6, 37545 Gera', '+499876543', 'W.Jacobi@email.de', '01.01.2008', 3);
+
+select * from verein order by Betrittsjahr;
+
+alter table Verein add Beratung varchar(20) check (Beratung in ('ja', 'nein', 'nur telefonisch'));
+
+update Verein set EMail = Name||'.'||(substring(Vorname, 1, 1 ))||'@imkerclub.hive';
+
+--Aufgabe 2
+create table Events(
+EventID int primary key,
+EventName varchar(30) not null,
+Beschreibung varchar(90),
+Veranstalter int references Verein(id),
+DatumDerVeranstaltung date not null
+);
+
+select 
+DatumDerVeranstaltung||' '||EventName||': '||Beschreibung||'-'||Veranstalter||'.'||Postanschrift as 'Events' 
+from Events, Verein 
+on Events.Veranstalter = Verein.id;
+
+alter table Events add Schulung boolean;
+alter table Events add Dozent  boolean;
+
+drop table Events;
+
+UPDATE events SET Schulung = TRUE WHERE Beschreibung like
+'<Schulung> ';
+update events set Dozent = true where Beschreibung like '<Schulung>'; 
+
+UPDATE events SET Beschreibung = REPLACE(Beschreibung, '<Schulung>', '' );
+
+select
+case 
+when Schulung =true  or Dozent=true
+then DatumDerVeranstaltung||' '||EventName||': '||Beschreibung||'<Schulung>'||'-'||Veranstalter||'.'||Postanschrift
+ELSE 
+DatumDerVeranstaltung||' '||EventName||': '||Beschreibung||'-'||Veranstalter||'.'||Postanschrift
+end as 'Events'
+from Events, Verein 
+on Events.Veranstalter = Verein.id;
 
 ------AUFGABENSAMMLUNG----------
 --2.4
