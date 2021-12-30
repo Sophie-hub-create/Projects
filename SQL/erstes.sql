@@ -273,6 +273,7 @@ SELECT TRIM( '     test    ') AS Result;
 
 select max(pages) as 'max pages', title from books;
 SELECT * FROM books WHERE pages = (SELECT Max(pages) FROM books); 
+
 --subquery
 SELECT author_fname, 
        author_lname, 
@@ -302,6 +303,7 @@ select sum (stock_quantity) from books;
 SELECT round(avg(released_year)) , author_fname, author_lname from books group by author_fname, author_lname ;
 select max(pages), author_fname ||' '|| author_lname as 'full name'  from books;
 select released_year, count(released_year), avg(pages) as 'avg pages' from books group by released_year ;
+
 
 --char FIXED length --> vorgegeben und MUSS genauso lang sein
 -- 0 bis 255
@@ -410,6 +412,8 @@ FROM books
 GROUP BY author_lname, author_fname;
 
 ---------FROM ONE TO MANY-----------------------------
+
+
 --primary key --> UNIQUE
 --foreign key --> Verweis auf eine andere Tabelle innerhalb einer bestimmten Tabelle
 
@@ -535,7 +539,6 @@ from student left join papers on id = papers.student_id
 group by first_name
 order by average desc;
 
-
 ---------Übungsblätter---------
 --BLATT 1------
 
@@ -621,7 +624,6 @@ AnzahlMitarbeiter as 'Mitarbeiter',
 ((Budget *0.2)+2200*AnzahlMitarbeiter) as Rückstellungen 
 from Projektmanagement_1
 order by Rückstellungen asc;
-
 
 -------Blatt 5------------------
 
@@ -993,6 +995,93 @@ select gemietetvon, Kennzeichen, Name
 from Autovermietung, Autokunden_0 , Fahrzeuge_1 
 where autovermietung.Mietzaehler = fahrzeuge_1.FahrzeugID and autovermietung.Mietzaehler = Autokunden_0.ID;
 
+CREATE TABLE Kundentermine (
+ KName varchar(30),
+ KVorname varchar(30),
+ KGeburtsdatum date,
+ KTelefon varchar(15),
+ KStrasse varchar(30),
+ KHausnummer varchar(5),
+ kOrt varchar(30),
+ KPlz char(5),
+ Dauer int,
+ Termin time,
+ Datum date,
+ Auftrag varchar(15)
+ CHECK (Auftrag IN ('Reparatur','Service','Reifenwechsel','Tuev','Sonstiges'))
+);
+
+INSERT INTO Kundentermine Values('Krause','Peter','1980-11-10','+4912242412','Markstrasse','14','Hagen','44223',15,'8:30','2021-12-13','Tuev');
+INSERT INTO Kundentermine Values('Mueller','Anna','1977-08-13','+4943435642','Hannengasse','28','Hagen','44224',30,'8:45','2021-12-13','Service');
+INSERT INTO Kundentermine Values('Schmidt','Fred','1956-05-05','+4954351342','Bruchweg','4','Hagen','44223',25,'9:15','2021-12-13','Reifenwechsel');
+INSERT INTO Kundentermine Values('Prennes','Heide','1970-10-12','+496223462','Marktplatz','1','Hagen','44224',15,'9:40','2021-12-13','Sonstiges');
+
+select * from Kundentermine ;
+select Termin||'   '||KVorname||' '||KName||', '||Auftrag||' - '||Dauer||'min'||'   (von Team '||Team||' bearbeitet)' as 'Tagesplan' from Kundentermine;
+select * from Kundentermine where Datum = '2021-07-08' and Termin = '13:00';
+
+alter table Kundentermine add Team char(2) check (Team in('a', 'b'));
+update Kundentermine set Team = 'b' where KVorname = 'Heide'; 
+
+ALTER Table Kundentermine 
+  ADD Kennzeichen varchar(10);
+ALTER Table Kundentermine 
+  ADD Marke varchar(10);
+ALTER Table Kundentermine 
+  ADD Fin varchar(17);
+ALTER Table Kundentermine 
+  ADD KMStand int;
+ALTER Table Kundentermine 
+  ADD Termin_id int;
+ 
+update Kundentermine set Termin_id = 4 where KVorname = 'Heide'; 
+UPDATE  Kundentermine SET Kennzeichen = 'Ha-Ha 554', Marke = 'BMW', Fin = '46HG5612ASDFER234', KMSTAND = 45330 WHERE Termin_id = 5;
+ UPDATE  Kundentermine SET Kennzeichen = 'Ha-Ne 112', Marke = 'BMW', Fin = '86HG5345ASDFER234', KMSTAND = 54530 WHERE Termin_id = 2;
+ UPDATE  Kundentermine SET Kennzeichen = 'Ha-LI 9001', Marke = 'Audi', Fin = '76HG5612AFASGR234', KMSTAND = 155600 WHERE Termin_id = 3;
+ UPDATE  Kundentermine SET Kennzeichen = 'Ha-MA 3664', Marke = 'Honda', Fin = '56HG522ASDASDR234', KMSTAND = 4323 WHERE Termin_id = 4;
+ UPDATE  Kundentermine SET Kennzeichen = 'Ha-WQ 1234', Marke = 'Honda', Fin = '86DG522ASDASDR234', KMSTAND = 123000 WHERE Termin_id = 1;
+select (Marke||': '||count(*)) as 'Anzahl Fahrzeuge' from Kundentermine group by Marke;
+
+CREATE TABLE Kunden (
+ KID int,
+ KName varchar(30),
+ KVorname varchar(30),
+ KGeburtsdatum date,
+ KTelefon varchar(15),
+ KStrasse varchar(30),
+ KHausnummer varchar(5),
+ kOrt varchar(30),
+ KPlz char(5)
+);
+--funktioniert wieder alles nicht
+CREATE generator KundenID_Generator;
+SET Generator KundenID_Generator TO 0;
+
+INSERT INTO KUNDEN 
+  SELECT NEXT value for KundenID_Generator, KName, KVorname, KGeburtsdatum, Ktelefon, KStrasse, KHausnummer, KOrt, KPLZ FROM KUNDENTERMINE;
+--bis hierher
+
+ ALTER TABLE KUNDENTERMINE ADD KundenFK int;
+select* from Kundentermine;
+update Kundentermine set KundenFK = 4 where KVorname = 'Heide'; 
+
+
+insert into Kunden 
+(KID, KName,KVorname,  KGeburtsdatum, KTelefon, KStrasse, KHausnummer, KOrt, kPlz)
+select
+KundenFK, KName,KVorname,  KGeburtsdatum, KTelefon, KStrasse, KHausnummer, KOrt, kPlz
+from Kundentermine ;
+
+alter table Kundentermine drop Kplz;
+
+select Termin||'   '||KVorname||' '||KName||' '||'('||Marke||', '||Kennzeichen ||') '||Auftrag||' - '||Dauer||'min'||'   (von Team '||Team||' bearbeitet)' 
+as 'Tagesplan'
+from Kundentermine, Kunden on Kunden.KID = Kundentermine.KundenFK ;
+ 
+alter table Kundentermine 
+  alter KundenFK add constraint KundenFK
+  foreign key (KID) references Kunden;
+ 
 ------AUFGABENSAMMLUNG----------
 --2.4
 create table Schueler_0(
@@ -1056,4 +1145,12 @@ Klasse char(3) not null constraint UK_01 unique,
 Geburtstag date check (current_date - 6 *365 >= Geburtstag),
 Notiz varchar(255)
 );
+
+
+
+
+
+
+
+
 
