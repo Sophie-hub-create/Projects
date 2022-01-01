@@ -5,11 +5,13 @@ body {
 }
 
 h1 {
+    font-size: 5.625rem;
     font-family: 'Sacramento', cursive;
     ;
 }
 
 h3 {
+    font-size: 2.25rem;
     font-family: 'Montserrat', sans-serif;
 }
 
