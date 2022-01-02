@@ -1081,6 +1081,70 @@ from Kundentermine, Kunden on Kunden.KID = Kundentermine.KundenFK ;
 alter table Kundentermine 
   alter KundenFK add constraint KundenFK
   foreign key (KID) references Kunden;
+
+
+    CREATE TABLE reviewers (
+        id INT  PRIMARY KEY,
+        first_name VARCHAR(100),
+        last_name VARCHAR(100)
+    );
+   
+   
+    CREATE TABLE series(
+        id INT  PRIMARY KEY,
+        title VARCHAR(100),
+        released_year YEAR(4),
+        genre VARCHAR(100)
+    );
+   
+       CREATE TABLE reviews (
+        id INT  PRIMARY KEY,
+        rating DECIMAL(2,1),
+        series_id INT,
+        reviewer_id INT,
+        FOREIGN KEY(series_id) REFERENCES series(id),
+        FOREIGN KEY(reviewer_id) REFERENCES reviewers(id)
+    );
+   
+
+    INSERT INTO series (id, title, released_year, genre) VALUES
+        (1,'Archer', 2009, 'Animation'),
+        (2,'Arrested Development', 2003, 'Comedy'),
+        (3,"Bob's Burgers", 2011, 'Animation'),
+        (4,'Bojack Horseman', 2014, 'Animation'),
+        (5,"Breaking Bad", 2008, 'Drama'),
+        (6,'Curb Your Enthusiasm', 2000, 'Comedy'),
+        (7,"Fargo", 2014, 'Drama'),
+        (8,'Freaks and Geeks', 1999, 'Comedy'),
+        (9,'General Hospital', 1963, 'Drama'),
+        (10,'Halt and Catch Fire', 2014, 'Drama'),
+        (11,'Malcolm In The Middle', 2000, 'Comedy'),
+        (12,'Pushing Daisies', 2007, 'Comedy'),
+        (13,'Seinfeld', 1989, 'Comedy'),
+        (14,'Stranger Things', 2016, 'Drama');
+    
+INSERT INTO reviewers (id, first_name, last_name) VALUES
+    (1,'Thomas', 'Stoneman'),
+    (2,'Wyatt', 'Skaggs'),
+    (3,'Kimbra', 'Masters'),
+    (4,'Domingo', 'Cortes'),
+    (5,'Colt', 'Steele'),
+    (6,'Pinkie', 'Petit'),
+    (7,'Marlon', 'Crafford');
+   
+INSERT INTO reviews(id, series_id, reviewer_id, rating) VALUES
+    (1,1,1,8.0),(2,1,2,7.5),(3,1,3,8.5),(4,1,4,7.7),(5,1,5,8.9),
+    (6,2,1,8.1),(7,2,4,6.0),(8,2,3,8.0),(9,2,6,8.4),(10,2,5,9.9),
+    (11,3,1,7.0),(12,3,6,7.5),(13,3,4,8.0),(14,3,3,7.1),(15,3,5,8.0),
+    (16,4,1,7.5),(17,4,3,7.8),(18,4,4,8.3),(19,4,2,7.6),(20,4,5,8.5),
+    (21,5,1,9.5),(22,5,3,9.0),(23,5,4,9.1),(24,5,2,9.3),(25,5,5,9.9),
+    (26,6,2,6.5),(27,6,3,7.8),(28,6,4,8.8),(29,6,2,8.4),(30,6,5,9.1),
+    (31,7,2,9.1),(32,7,5,9.7),
+    (33,8,4,8.5),(34,8,2,7.8),(35,8,6,8.8),(36,8,5,9.3),
+    (37,9,2,5.5),(38,9,3,6.8),(39,9,4,5.8),(40,9,6,4.3),(41,9,5,4.5),
+    (42,10,5,9.9),
+    (43,13,3,8.0),(44,13,4,7.2),
+    (45,14,2,8.5),(46,14,3,8.9),(47,14,4,8.9);
  
 ------AUFGABENSAMMLUNG----------
 --2.4
