@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class ReverseString
 {
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+		var scanner = new Scanner(System.in);
 		String text = scanner.nextLine();
 		char[] arr = text.toCharArray();
 		
