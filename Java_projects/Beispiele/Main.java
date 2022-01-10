@@ -52,6 +52,11 @@ public class Main {
     System.out.println(one.getAccountNumber());
     System.out.println(one.depositFund(500));
     System.out.println(one.withdrawFund(1000));
-
+    BankAccount two = new BankAccount(123, 4000, "Barbara Rhababer", "barbi@Beilspiel.com", "03487234");
+    System.out.println(two.FullCustomer());
+    System.out.println(two.contactDates());
+    System.out.println(two.getAccountNumber());
+    System.out.println(two.depositFund(500));
+    System.out.println(two.withdrawFund(1000));
 }
 }

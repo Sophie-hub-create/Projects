@@ -13,7 +13,8 @@ public class NumberPalindrome {
             reverse*=10;          
             number /= 10;
         }
-        reverse/=10;  ///wieso ?????????
+        reverse/=10;  ///wieso ?????????--> PRUEFEN OB NUMBER/10 > 0
+
         if(reverse == numberBefore){
             result = true;            
         }
