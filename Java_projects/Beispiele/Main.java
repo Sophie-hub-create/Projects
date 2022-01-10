@@ -39,5 +39,19 @@ public class Main {
     System.out.println(person.isTeen());
     person.setLastName("Smith");
     System.out.println(person.getFullName());
+
+    //Beispiele Class BankAccount
+    BankAccount one = new BankAccount();
+    one.setAccountNumber(123456);
+    one.setBalance(5000);
+    one.setCustomerName("Max Mustermann");
+    one.setEmail("m.mustermann@Beispiel.de");
+    one.setPhoneNumber("0349834098234");
+    System.out.println(one.FullCustomer());
+    System.out.println(one.contactDates());
+    System.out.println(one.getAccountNumber());
+    System.out.println(one.depositFund(500));
+    System.out.println(one.withdrawFund(1000));
+
 }
 }
