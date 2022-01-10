@@ -26,6 +26,18 @@ public class Main {
     System.out.println(calculator.getMultiplicationResult());
     System.out.println(calculator.getDivisionResult());
 
-
-    }
+    //Beispiele Class Person
+    Person person = new Person();
+    person.setFirstName("");
+    person.setLastName("");
+    person.setAge(10);
+    System.out.println(person.getFullName());
+    System.out.println(person.isTeen());
+    person.setFirstName("John");
+    person.setAge(18);
+    System.out.println(person.getFullName());
+    System.out.println(person.isTeen());
+    person.setLastName("Smith");
+    System.out.println(person.getFullName());
+}
 }
