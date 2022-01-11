@@ -6,6 +6,7 @@ public class Point {
 
     public Point(){
     }
+
     public Point(int x, int y){
         this.x = x;
         this.y = y;
@@ -20,7 +21,7 @@ public class Point {
     }
 
     public void setX(int x){
-        this.x=x;
+        this.x = x;
     }
 
     public void setY(int y){
@@ -29,7 +30,7 @@ public class Point {
 
     public double distance(){
         double result;
-        result = Math.sqrt((this.x-this.x)*(this.x-this.x)+(this.y-this.y)*(this.y-this.y));
+        result = Math.sqrt((this.x-0)*(this.x-0)+(this.y-0)*(this.y-0));
         return result;
     }
 
@@ -39,8 +40,10 @@ public class Point {
         return result;
     }
 
-    //noch fertig machen
-
-    
+    public double distance(Point x){
+        double result;
+        result = Math.sqrt((this.x-x.x)*(this.x-x.x)+(this.y-x.y)*(this.y-x.y));
+        return result;
+    }    
 
 }
