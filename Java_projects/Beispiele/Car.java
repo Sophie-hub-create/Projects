@@ -8,6 +8,10 @@ public class Car {
     private String engine;
     private String colour;
 
+    public Car(){
+        
+    }
+
     public void setColour(String colour){
         String validColour = colour.toLowerCase();
         if (validColour.equals("blue") || validColour.equals("black")){
