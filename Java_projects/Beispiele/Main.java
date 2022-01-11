@@ -67,5 +67,17 @@ public class Main {
     System.out.println(Max.getCreditLimit());
     System.out.println(Moritz.getCreditLimit());
 
+    //Beispiele Wall
+    Wall wall = new Wall(5.0, 4.0);
+    System.out.println(wall.getArea());
+    wall.setHeight(-1.5);
+    System.out.println(wall.getWidth());
+    System.out.println(wall.getHeight());
+    System.out.println(wall.getArea());
+
+
+
+
+
 }
 }
