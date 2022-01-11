@@ -3,7 +3,7 @@ package Beispiele;
 public class Main {
     public static void main(String[] args)  {
 
-        //Beispiele Class Car
+    //Beispiele Class Car
        Car volvo = new Car();
        Car ford = new Car();
        volvo.setModel("XC90");
@@ -14,8 +14,7 @@ public class Main {
         System.out.println(ford.getModel());
         System.out.println(ford.getColour());
 
-        //Beispiele Class SimpleCalculator
-
+    //Beispiele Class SimpleCalculator
     SimpleCalculator calculator = new SimpleCalculator();
     calculator.setFirstNumber(5.0);
     calculator.setSecondNumber(4);
@@ -58,5 +57,15 @@ public class Main {
     System.out.println(two.getAccountNumber());
     System.out.println(two.depositFund(500));
     System.out.println(two.withdrawFund(1000));
+
+    //Beispiele VipAccount
+    VipCustomer Rachel = new VipCustomer();
+    VipCustomer Max = new VipCustomer("Max", 200.00, "M.Mustermann@Beispiel.de");
+    VipCustomer Moritz = new VipCustomer(100.00, "Moritz@Beispiel.de");
+    System.out.println(Rachel.getCreditLimit());
+    System.out.println(Rachel.getEmailAddress());
+    System.out.println(Max.getCreditLimit());
+    System.out.println(Moritz.getCreditLimit());
+
 }
 }
