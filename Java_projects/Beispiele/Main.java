@@ -116,5 +116,14 @@ public class Main {
     System.out.println("cuboid.height= " + cuboid.getHeight());
     System.out.println("cuboid.volume= " + cuboid.getVolume());
 
+    //Beispiele Kitchen
+    KitchenWall wall1 = new Kitchenfloor(3.0, 4.0, "yellow", false);
+    KitchenWall wall2 = new Kitchenfloor(3.0, 4.0, "white", false);
+    KitchenWall wall3 = new Kitchenfloor(3.0, 2.0, "none", true);
+    KitchenWall wall4 = new Kitchenfloor(3.0, 2.0, "none", true);
+
+    
+
+
 }
 }
