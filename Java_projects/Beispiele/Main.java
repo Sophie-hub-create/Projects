@@ -18,12 +18,12 @@ public class Main {
     SimpleCalculator calculator = new SimpleCalculator();
     calculator.setFirstNumber(5.0);
     calculator.setSecondNumber(4);
-    System.out.println(calculator.getAdditionResult());
-    System.out.println(calculator.getSubtractionResult());
+    System.out.println("add= " + calculator.getAdditionResult());
+    System.out.println("subtract= " + calculator.getSubtractionResult());
     calculator.setFirstNumber(5.25);
     calculator.setSecondNumber(0);
-    System.out.println(calculator.getMultiplicationResult());
-    System.out.println(calculator.getDivisionResult());
+    System.out.println("multiply= " + calculator.getMultiplicationResult());
+    System.out.println("divide= " + calculator.getDivisionResult());
 
     //Beispiele Class Person
     Person person = new Person();
@@ -75,6 +75,7 @@ public class Main {
     System.out.println(wall.getHeight());
     System.out.println(wall.getArea());
 
+<<<<<<< HEAD
     //Circle Cylinder
 
     Circle circle = new Circle(3.75);
@@ -86,8 +87,36 @@ public class Main {
     System.out.println("cylinder.area= " + cylinder.getArea());
     System.out.println("cylinder.volume= " + cylinder.getVolume());
     
+=======
+    //Beispiele Point
+    Point first = new Point(6, 5);
+    Point second = new Point(3, 1);
+    System.out.println("distance(0,0)= " + first.distance());
+    System.out.println("distance(second)= " + first.distance(second));
+    System.out.println("distance(2,2)= " + first.distance(2, 2));
+    Point point = new Point();
+    System.out.println("distance()= " + point.distance());
     
 
+    //Beispiele Carpet, Floor, Calculator
+    Carpet carpet = new Carpet(3.5);
+    Floor floor = new Floor(2.75, 4.0);
+    Calculator calculator2 = new Calculator(floor, carpet);
+    System.out.println("total= " + calculator2.getTotalCost());
+    carpet = new Carpet(1.5);
+    floor = new Floor(5.4, 4.5);
+    calculator2 = new Calculator(floor, carpet);
+    System.out.println("total= " + calculator2.getTotalCost());
+>>>>>>> 8058d03297c72ce3faf0bb5ac84b17bd5a1011ee
+    
+    Circle circle = new Circle(3.75);
+    System.out.println("circle.radius= " + circle.getRadius());
+    System.out.println("circle.area= " + circle.getArea());
+    Cylinder cylinder = new Cylinder(5.55, 7.25);
+    System.out.println("cylinder.radius= " + cylinder.getRadius());
+    System.out.println("cylinder.height= " + cylinder.getHeight());
+    System.out.println("cylinder.area= " + cylinder.getArea());
+    System.out.println("cylinder.volume= " + cylinder.getVolume());
 
 
 
