@@ -117,12 +117,26 @@ public class Main {
     System.out.println("cuboid.volume= " + cuboid.getVolume());
 
     //Beispiele Kitchen
-    KitchenWall wall1 = new Kitchenfloor(3.0, 4.0, "yellow", false);
-    KitchenWall wall2 = new Kitchenfloor(3.0, 4.0, "white", false);
-    KitchenWall wall3 = new Kitchenfloor(3.0, 2.0, "none", true);
-    KitchenWall wall4 = new Kitchenfloor(3.0, 2.0, "none", true);
+    KitchenWall wall1 = new KitchenWall(3.0, 4.0, "yellow", false);
+    KitchenWall wall2 = new KitchenWall(3.0, 4.0, "white", false);
+    KitchenWall wall3 = new KitchenWall(3.0, 2.0, "none", true);
+    KitchenWall wall4 = new KitchenWall(3.0, 2.0, "none", true);
 
-    
+    System.out.println(wall1.getWallArea());
+    System.out.println(wall2.isWallpaper());
+    System.out.println(wall3.getColour());
+    System.out.println(wall4.getWallArea());
+
+    KitchenFloor Kitchenfloor = new KitchenFloor(4.0, 2.0, "PVC", false);
+    System.out.println(Kitchenfloor.getFloorArea());
+    System.out.println(Kitchenfloor.getFlooring());
+    System.out.println(Kitchenfloor.isOld());
+
+    KitchenLamp lamp = new KitchenLamp(0.5, 1.2, "little standing lamp", true);
+
+    lamp.turnOff();
+    System.out.println(lamp.getTypeLamp());
+
 
 
 }
