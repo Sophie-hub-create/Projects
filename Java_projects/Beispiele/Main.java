@@ -4,15 +4,15 @@ public class Main {
     public static void main(String[] args)  {
 
     //Beispiele Class Car
-       Car volvo = new Car();
-       Car ford = new Car();
-       volvo.setModel("XC90");
-       System.out.println("Model is: "+ volvo.getModel());
-       volvo.setColour("black");
-        ford.setModel("Fusion");
-        ford.setColour("green");
-        System.out.println(ford.getModel());
-        System.out.println(ford.getColour());
+    CarFirst volvo = new CarFirst();
+    CarFirst ford2 = new CarFirst();
+    volvo.setModel("XC90");
+    System.out.println("Model is: "+ volvo.getModel());
+    volvo.setColour("black");
+    ford2.setModel("Fusion");
+    ford2.setColour("green");
+    System.out.println(ford2.getModel());
+    System.out.println(ford2.getColour());
 
     //Beispiele Class SimpleCalculator
     SimpleCalculator calculator = new SimpleCalculator();
@@ -95,7 +95,23 @@ public class Main {
     calculator2 = new Calculator(floor, carpet);
     System.out.println("total= " + calculator2.getTotalCost());
     
-
+    //Beispiele Cars
+    Car car = new Car(8, "Base Car");
+    car.startEngine();
+    car.accelerate();
+    car.brake();
+    Mitsubishi mitsubishi = new Mitsubishi(6, "Outlander VRX");
+    mitsubishi.startEngine();
+    mitsubishi.accelerate();
+    mitsubishi.brake();
+    Ford ford = new Ford(4, "Fusion");
+    ford.startEngine();
+    ford.accelerate();
+    ford.brake();
+    Holden holden = new Holden(6, "Commodore");
+    holden.startEngine();
+    holden.accelerate();
+    holden.brake();
 
 
 
