@@ -154,5 +154,19 @@ public class Main {
 
     bedRoom.getLamp().turnOn();
 
+    //Beispiele Printer
+    Printer printer = new Printer(50, true);
+    System.out.println(printer.addToner(50));
+    System.out.println(printer.getPagesPrinted());
+    System.out.println(printer.printPages(4));
+    System.out.println(printer.printPages(2));
+    System.out.println(printer.getPagesPrinted());
+    Printer printer2 = new Printer(50, false);
+    System.out.println(printer2.addToner(50));
+    System.out.println(printer2.getPagesPrinted());
+    System.out.println(printer2.printPages(4));
+    System.out.println(printer2.printPages(2));
+    System.out.println(printer2.getPagesPrinted());
+
 }
 }
