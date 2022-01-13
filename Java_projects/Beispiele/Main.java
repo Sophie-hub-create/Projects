@@ -136,8 +136,7 @@ public class Main {
 
     //KOMPOSITION /COMPOSITION !!!!
     myKitchen.getLamp().turnOff();
-    
-<<<<<<< HEAD
+
     //Beispiele Cars
     Car car = new Car(8, "Base Car");
     car.startEngine();
@@ -155,7 +154,7 @@ public class Main {
     holden.startEngine();
     holden.accelerate();
     holden.brake();
-=======
+
     //Beispiele BedRoom
     Wall wall1 = new Wall("West");
     Wall wall2 = new Wall("East");
@@ -170,7 +169,7 @@ public class Main {
 
     Bedroom bedRoom = new Bedroom("Tims", lamp,wall1, wall2, wall3, wall4, ceiling,bed);
     bedRoom.makeBed();
->>>>>>> 568fe3f2bfcd1ee7b0dd067da433691a46434257
+
 
     bedRoom.getLamp().turnOn();
 
