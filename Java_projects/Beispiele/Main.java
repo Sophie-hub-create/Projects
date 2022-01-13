@@ -68,7 +68,7 @@ public class Main {
     System.out.println(Moritz.getCreditLimit());
 
     //Beispiele Wall
-    Wall wall = new Wall(5.0, 4.0);
+    Wall1 wall = new Wall1(5.0, 4.0);
     System.out.println(wall.getArea());
     wall.setHeight(-1.5);
     System.out.println(wall.getWidth());
@@ -117,27 +117,42 @@ public class Main {
     System.out.println("cuboid.volume= " + cuboid.getVolume());
 
     //Beispiele Kitchen
-    KitchenWall wall1 = new KitchenWall(3.0, 4.0, "yellow", false);
-    KitchenWall wall2 = new KitchenWall(3.0, 4.0, "white", false);
-    KitchenWall wall3 = new KitchenWall(3.0, 2.0, "none", true);
-    KitchenWall wall4 = new KitchenWall(3.0, 2.0, "none", true);
-
-    System.out.println(wall1.getWallArea());
-    System.out.println(wall2.isWallpaper());
-    System.out.println(wall3.getColour());
-    System.out.println(wall4.getWallArea());
-
+    KitchenWall wall12 = new KitchenWall(3.0, 4.0, "yellow", false);
+    KitchenWall wall22 = new KitchenWall(3.0, 4.0, "white", false);
+    KitchenWall wall32 = new KitchenWall(3.0, 2.0, "none", true);
+    KitchenWall wall42 = new KitchenWall(3.0, 2.0, "none", true);
+    KitchenLamp lamp2= new KitchenLamp(0.5, 1.2, "little standing lamp", true);
     KitchenFloor Kitchenfloor = new KitchenFloor(4.0, 2.0, "PVC", false);
+    Kitchen myKitchen = new Kitchen(wall12, wall22, wall32, wall42, Kitchenfloor, lamp2);
+
+    System.out.println(wall12.getWallArea());
+    System.out.println(wall22.isWallpaper());
+    System.out.println(wall32.getColour());
+    System.out.println(wall42.getWallArea());
+
     System.out.println(Kitchenfloor.getFloorArea());
     System.out.println(Kitchenfloor.getFlooring());
     System.out.println(Kitchenfloor.isOld());
 
-    KitchenLamp lamp = new KitchenLamp(0.5, 1.2, "little standing lamp", true);
+    //KOMPOSITION /COMPOSITION !!!!
+    myKitchen.getLamp().turnOff();
+    
+    //Beispiele BedRoom
+    Wall wall1 = new Wall("West");
+    Wall wall2 = new Wall("East");
+    Wall wall3 = new Wall("South");
+    Wall wall4 = new Wall("North");
 
-    lamp.turnOff();
-    System.out.println(lamp.getTypeLamp());
+    Ceiling ceiling = new Ceiling(12, 55);
 
+    Bed bed = new Bed("Modern", 4, 3, 2, 1);
 
+    Lamp lamp = new Lamp("Classic", false, 75);
+
+    Bedroom bedRoom = new Bedroom("Tims", lamp,wall1, wall2, wall3, wall4, ceiling,bed);
+    bedRoom.makeBed();
+
+    bedRoom.getLamp().turnOn();
 
 }
 }

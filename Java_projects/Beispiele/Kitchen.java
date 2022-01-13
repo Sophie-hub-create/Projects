@@ -17,7 +17,24 @@ public class Kitchen {
         this.floor=floor;
         this.lamp=lamp;
     }
+    public KitchenLamp getLamp(){
+        return this.lamp;
+    }
+    public boolean PowerOn() {
+        boolean result = lamp.isPowerOn();
+        return result;
+    }
 
-
-    
+    public void turnOff(){
+        boolean result =PowerOn();
+        if(result == true)
+        {
+            System.out.println("Please turn off the light in the kitchen");
+        }
+        else{
+            System.out.println("You already turned off the light");
+        }
+    }
+   
+ 
 }
