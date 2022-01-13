@@ -1,58 +1,12 @@
 package Beispiele;
 
 public class Wall {
+    private String direction;
     
-    private double width;
-    private double height;
-
-    public Wall(){
-
+    public Wall(String direction){
+        this.direction=direction;
     }
-
-    public Wall(double width, double height){
-        if(height < 0){
-            this.height=0;
-        }
-        else{
-            this.height=height;
-        }
-        if(width < 0){
-            this.width=0;
-        }
-        else{
-            this.width=width;
-        }
+    public String getDirection(){
+        return direction;
     }
-
-    public double getWidth(){
-        return this.width;
-    }
-
-    public double getHeight(){
-        return this.height;
-    }
-
-    public void setWidth(double width){
-        if(width < 0){
-            this.width=0;
-        }
-        else{
-            this.width = width;
-        }
-    }
-
-    public void setHeight(double height){
-        if(height < 0){
-            this.height=0;
-        }
-        else{
-            this.height = height;
-        }
-    }
-
-    public double getArea(){
-        return this.width*this.height;
-    }
-    
-
 }

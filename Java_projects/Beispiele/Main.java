@@ -68,7 +68,7 @@ public class Main {
     System.out.println(Moritz.getCreditLimit());
 
     //Beispiele Wall
-    Wall wall = new Wall(5.0, 4.0);
+    Wall1 wall = new Wall1(5.0, 4.0);
     System.out.println(wall.getArea());
     wall.setHeight(-1.5);
     System.out.println(wall.getWidth());
@@ -94,7 +94,50 @@ public class Main {
     floor = new Floor(5.4, 4.5);
     calculator2 = new Calculator(floor, carpet);
     System.out.println("total= " + calculator2.getTotalCost());
+
     
+    Circle circle = new Circle(3.75);
+    System.out.println("circle.radius= " + circle.getRadius());
+    System.out.println("circle.area= " + circle.getArea());
+    Cylinder cylinder = new Cylinder(5.55, 7.25);
+    System.out.println("cylinder.radius= " + cylinder.getRadius());
+    System.out.println("cylinder.height= " + cylinder.getHeight());
+    System.out.println("cylinder.area= " + cylinder.getArea());
+    System.out.println("cylinder.volume= " + cylinder.getVolume());
+
+    Rectangle rectangle = new Rectangle(5, 10);
+    System.out.println("rectangle.width= " + rectangle.getWidth());
+    System.out.println("rectangle.length= " + rectangle.getLength());
+    System.out.println("rectangle.area= " + rectangle.getArea());
+    Cuboid cuboid = new Cuboid(5,10,5);
+    System.out.println("cuboid.width= " + cuboid.getWidth());
+    System.out.println("cuboid.length= " + cuboid.getLength());
+    System.out.println("cuboid.area= " + cuboid.getArea());
+    System.out.println("cuboid.height= " + cuboid.getHeight());
+    System.out.println("cuboid.volume= " + cuboid.getVolume());
+
+    //Beispiele Kitchen
+    KitchenWall wall12 = new KitchenWall(3.0, 4.0, "yellow", false);
+    KitchenWall wall22 = new KitchenWall(3.0, 4.0, "white", false);
+    KitchenWall wall32 = new KitchenWall(3.0, 2.0, "none", true);
+    KitchenWall wall42 = new KitchenWall(3.0, 2.0, "none", true);
+    KitchenLamp lamp2= new KitchenLamp(0.5, 1.2, "little standing lamp", true);
+    KitchenFloor Kitchenfloor = new KitchenFloor(4.0, 2.0, "PVC", false);
+    Kitchen myKitchen = new Kitchen(wall12, wall22, wall32, wall42, Kitchenfloor, lamp2);
+
+    System.out.println(wall12.getWallArea());
+    System.out.println(wall22.isWallpaper());
+    System.out.println(wall32.getColour());
+    System.out.println(wall42.getWallArea());
+
+    System.out.println(Kitchenfloor.getFloorArea());
+    System.out.println(Kitchenfloor.getFlooring());
+    System.out.println(Kitchenfloor.isOld());
+
+    //KOMPOSITION /COMPOSITION !!!!
+    myKitchen.getLamp().turnOff();
+    
+<<<<<<< HEAD
     //Beispiele Cars
     Car car = new Car(8, "Base Car");
     car.startEngine();
@@ -112,8 +155,38 @@ public class Main {
     holden.startEngine();
     holden.accelerate();
     holden.brake();
+=======
+    //Beispiele BedRoom
+    Wall wall1 = new Wall("West");
+    Wall wall2 = new Wall("East");
+    Wall wall3 = new Wall("South");
+    Wall wall4 = new Wall("North");
 
+    Ceiling ceiling = new Ceiling(12, 55);
 
+    Bed bed = new Bed("Modern", 4, 3, 2, 1);
+
+    Lamp lamp = new Lamp("Classic", false, 75);
+
+    Bedroom bedRoom = new Bedroom("Tims", lamp,wall1, wall2, wall3, wall4, ceiling,bed);
+    bedRoom.makeBed();
+>>>>>>> 568fe3f2bfcd1ee7b0dd067da433691a46434257
+
+    bedRoom.getLamp().turnOn();
+
+    //Beispiele Printer
+    Printer printer = new Printer(50, true);
+    System.out.println(printer.addToner(50));
+    System.out.println(printer.getPagesPrinted());
+    System.out.println(printer.printPages(4));
+    System.out.println(printer.printPages(2));
+    System.out.println(printer.getPagesPrinted());
+    Printer printer2 = new Printer(50, false);
+    System.out.println(printer2.addToner(50));
+    System.out.println(printer2.getPagesPrinted());
+    System.out.println(printer2.printPages(4));
+    System.out.println(printer2.printPages(2));
+    System.out.println(printer2.getPagesPrinted());
 
 }
 }
