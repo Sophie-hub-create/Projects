@@ -138,22 +138,22 @@ public class Main {
     myKitchen.getLamp().turnOff();
 
     //Beispiele Cars
-    Car car = new Car(8, "Base Car");
-    car.startEngine();
-    car.accelerate();
-    car.brake();
-    Mitsubishi mitsubishi = new Mitsubishi(6, "Outlander VRX");
-    mitsubishi.startEngine();
-    mitsubishi.accelerate();
-    mitsubishi.brake();
-    Ford ford = new Ford(4, "Fusion");
-    ford.startEngine();
-    ford.accelerate();
-    ford.brake();
-    Holden holden = new Holden(6, "Commodore");
-    holden.startEngine();
-    holden.accelerate();
-    holden.brake();
+    // Car car = new Car(8, "Base Car");
+    // car.startEngine();
+    // car.accelerate();
+    // car.brake();
+    // Mitsubishi mitsubishi = new Mitsubishi(6, "Outlander VRX");
+    // mitsubishi.startEngine();
+    // mitsubishi.accelerate();
+    // mitsubishi.brake();
+    // Ford ford = new Ford(4, "Fusion");
+    // ford.startEngine();
+    // ford.accelerate();
+    // ford.brake();
+    // Holden holden = new Holden(6, "Commodore");
+    // holden.startEngine();
+    // holden.accelerate();
+    // holden.brake();
 
     //Beispiele BedRoom
     Wall wall1 = new Wall("West");
@@ -189,18 +189,20 @@ public class Main {
 
     //Beispiele Hamburger
     Hamburger hamburger = new Hamburger("Basic", "Sausage", 3.56, "White");
-    hamburger.addHamburgerAddition1("Tomato", 0.27);
-    hamburger.addHamburgerAddition2("Lettuce", 0.75);
-    hamburger.addHamburgerAddition3("Cheese", 1.13);
-    System.out.println("Total Burger price is " + hamburger.itemizeHamburger());
-    HealthyBurger healthyBurger = new HealthyBurger("Bacon", 5.67);
-    healthyBurger.addHamburgerAddition1("try!!!!Egg", 5.43);
-    healthyBurger.addHealthyBurgerAddition2("Egg", 5.43);
-    healthyBurger.addHealthyBurgerAddition1("Lentils", 3.41);
-    System.out.println("Total Healthy Burger price is  " + healthyBurger.itemizeHamburger());
-    DeluxeBurger db = new DeluxeBurger();
-    db.addHamburgerAddition3("Should not do this", 50.53);
-    System.out.println("Total Deluxe Burger price is " + db.itemizeHamburger());
+        double price = hamburger.itemizeHamburger();
+        hamburger.addHamburgerAddition1("Tomato", 0.27);
+        hamburger.addHamburgerAddition2("Lettuce", 0.75);
+        hamburger.addHamburgerAddition3("Cheese", 1.13);
+        System.out.println("Total Burger price is " + hamburger.itemizeHamburger());
+
+        HealthyBurger healthyBurger = new HealthyBurger("Bacon", 5.67);
+        healthyBurger.addHamburgerAddition1("Egg", 5.43);
+        healthyBurger.addHealthAddition1("Lentils", 3.41);
+        System.out.println("Total Healthy Burger price is  " + healthyBurger.itemizeHamburger());
+
+        DeluxeBurger db = new DeluxeBurger();
+        db.addHamburgerAddition3("Should not do this", 50.53);
+        db.itemizeHamburger();
 
 }
 }

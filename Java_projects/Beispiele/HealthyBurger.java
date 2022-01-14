@@ -1,30 +1,39 @@
 package Beispiele;
 
-public class HealthyBurger extends Hamburger{
-   private double result=0;
+public class HealthyBurger extends Hamburger {
 
-    public HealthyBurger(){
+    private String healthyExtra1Name;
+    private double healthyExtra1Price;
+
+    private String healthyExtra2Name;
+    private double healthyExtra2Price;
+
+    public HealthyBurger(String meat, double price) {
+        super("Healthy", meat, price, "Brown rye");
     }
 
-    public HealthyBurger(String meat, double price){
-        result += price;
-        System.out.println("Healthy hamburger on a Brown rye roll with "+meat+", price is "+price); 
+    public void addHealthAddition1(String name, double price) {
+        this.healthyExtra1Name = name;
+        this.healthyExtra1Price = price;
     }
-    public void addHealthyBurgerAddition1(String healthyExtra1Name, double healthyExtra1Price ){
-        result +=healthyExtra1Price;
-        System.out.println("Added "+healthyExtra1Name+" for an extra "+healthyExtra1Price);
+
+    public void addHealthAddition2(String name, double price) {
+        this.healthyExtra2Name = name;
+        this.healthyExtra2Price = price;
     }
-    public void addHealthyBurgerAddition2(String healthyExtra2Name, double healthyExtra2Price ){
-        result += healthyExtra2Price;
-        System.out.println("Added "+healthyExtra2Name+" for an extra "+healthyExtra2Price);
-    }
+
     @Override
-    public double itemizeHamburger(){
-        return result;
+    public double itemizeHamburger() {
+        double hamburgerPrice = super.itemizeHamburger();
+        if(this.healthyExtra1Name != null) {
+            hamburgerPrice += this.healthyExtra1Price;
+            System.out.println("Added " + this.healthyExtra1Name + " for an extra " + this.healthyExtra1Price);
+        }
+        if(this.healthyExtra2Name != null) {
+            hamburgerPrice += this.healthyExtra2Price;
+            System.out.println("Added " + this.healthyExtra2Name + " for an extra " + this.healthyExtra2Price);
+        }
+
+        return hamburgerPrice;
     }
-    
-
-
-
-
 }
