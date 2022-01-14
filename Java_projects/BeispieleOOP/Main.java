@@ -138,22 +138,22 @@ public class Main {
     myKitchen.getLamp().turnOff();
 
     //Beispiele Cars
-    // Car car = new Car(8, "Base Car");
-    // car.startEngine();
-    // car.accelerate();
-    // car.brake();
-    // Mitsubishi mitsubishi = new Mitsubishi(6, "Outlander VRX");
-    // mitsubishi.startEngine();
-    // mitsubishi.accelerate();
-    // mitsubishi.brake();
-    // Ford ford = new Ford(4, "Fusion");
-    // ford.startEngine();
-    // ford.accelerate();
-    // ford.brake();
-    // Holden holden = new Holden(6, "Commodore");
-    // holden.startEngine();
-    // holden.accelerate();
-    // holden.brake();
+    Car car = new Car(8, "Base Car");
+    car.startEngine();
+    car.accelerate();
+    car.brake();
+    Mitsubishi mitsubishi = new Mitsubishi(6, "Outlander VRX");
+    mitsubishi.startEngine();
+    mitsubishi.accelerate();
+    mitsubishi.brake();
+    Ford ford = new Ford(4, "Fusion");
+    ford.startEngine();
+    ford.accelerate();
+    ford.brake();
+    Holden holden = new Holden(6, "Commodore");
+    holden.startEngine();
+    holden.accelerate();
+    holden.brake();
 
     //Beispiele BedRoom
     Wall wall1 = new Wall("West");
