@@ -1,4 +1,4 @@
-package Beispiele;
+package BeispieleOOP;
 
 public class DeluxeBurger extends Hamburger {
     public DeluxeBurger() {

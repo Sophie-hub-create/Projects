@@ -1,4 +1,4 @@
-package Beispiele;
+package BeispieleOOP;
 
 public class Bedroom {
     private String name;
