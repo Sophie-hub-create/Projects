@@ -4,10 +4,10 @@ import random
 bella=Turtle()
 bella.color("purple")
 print(bella)
-stopWalking= random.randint(0,300)
+stopWalking= random.randint(0,500)
 colormode(255)
 choice=["f", "r", "l"]
-bella.pensize(10)
+bella.pensize(5)
 for j in range(0,stopWalking):    
     r = random.randint(0,255)
     g = random.randint(0,255)
@@ -17,11 +17,13 @@ for j in range(0,stopWalking):
     
     what=random.choice(choice)
     if what =="l":
-        bella.left(random.randint(0,50))
+        bella.left(90)
+        bella.forward(random.randint(0,100))
     elif what=="r":
-        bella.right(random.randint(0,50))
+        bella.right(90)
+        bella.forward(random.randint(0,100))
     else:
-        bella.forward(random.randint(0,50))
+        bella.forward(random.randint(0,100))
     
 
 myScreen = Screen()
