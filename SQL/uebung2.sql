@@ -80,6 +80,14 @@ where Lehrveranstaltung.Art='Uebung'
 group by ModulNummer
 order by Stundenanzahl desc;
 
+--Variante
+select Modul.Fachname, sum(Lehrveranstaltung.SWS) 
+as Stundenanzahl
+from Modul left join LV_zu_Modul on LV_zu_Modul.ModulNummer=Modul.ModulNR
+left join  Lehrveranstaltung on LV_zu_Modul.LehrV_NR=Lehrveranstaltung.LVNR
+where Lehrveranstaltung.Art='Uebung'
+group by ModulNummer;
+
 --Aufgabe 2 b)
 
 Select Lehrveranstaltung.Dozent, Lehrveranstaltung.LV_Name, 
@@ -92,8 +100,16 @@ and Lehrveranstaltung.Dozent != Modul.Verantwortliche;
 --??? manche Faecher sind mehreren Modulen zugeordnet. Beim zweiten kann der 
 --Dozent dann uU kein Verantwortlicher sein???
 
---Aufgabe 3
+--Variante
 
+SELECT Lehrveranstaltung.Dozent
+FROM Modul
+LEFT JOIN Lehrveranstaltung_Modul ON Lehrveranstaltung_Modul.ModulNR = Modul.ModulNR
+LEFT JOIN Lehrveranstaltung ON Lehrveranstaltung.LVNR = Lehrveranstaltung_Modul.LVNR
+WHERE Lehrveranstaltung.Art = 'Vorlesung' AND Lehrveranstaltung.Dozent <> Modul.Verantwortliche
+
+--Aufgabe 3
+--c)
 select modul.fachname, Lehrveranstaltung.LV_Name, 
 Lehrveranstaltung.Art 
 from modul 
@@ -101,5 +117,22 @@ join LV_zu_Modul
 on modul.ModulNR=LV_zu_Modul.ModulNummer 
 join Lehrveranstaltung 
 on LV_zu_Modul.LehrV_NR=Lehrveranstaltung.LVNR;
+
+--Varianten
+--a)
+SELECT Lehrveranstaltung.LV_Name, Lehrveranstaltung.Art, Modul.Fachname
+FROM Modul
+RIGHT JOIN LV_zu_Modul
+ON LV_zu_Modul.ModulNummer = Modul.ModulNR
+RIGHT JOIN Lehrveranstaltung 
+ON Lehrveranstaltung.LVNR = LV_zu_Modul.LehrV_NR;
+
+--b)
+SELECT Lehrveranstaltung.LV_Name, Lehrveranstaltung.Art, Modul.Fachname
+FROM Modul
+left JOIN LV_zu_Modul
+ON LV_zu_Modul.ModulNummer = Modul.ModulNR
+left JOIN Lehrveranstaltung 
+ON Lehrveranstaltung.LVNR = LV_zu_Modul.LehrV_NR;
 
 
