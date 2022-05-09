@@ -27,3 +27,28 @@ where Einwohner > (
     where Region ='Suedamerika'
 );
 
+select Landname from laender
+where Einwohner >
+(select max(Einwohner) from laender
+where Region = 'Europa');
+
+select Landname from laender
+where BIP >
+(Select BIP from laender where name = 'Groß-Britannien');
+
+select * 
+from laender
+where region in
+(select region from laender where Landname in ('Armenien','Iran'));
+
+select Landname from laender
+where (einwohner/flaeche) >
+(Select avg(einwohner/flaeche) 
+from laender where region ='Suedostasien');
+
+select Landname from laender
+where einwohner >
+(select Einwohner from laender where landname ='Kenia')
+and  einwohner <
+(select Einwohner from laender where landname = 'Kanada');
+
