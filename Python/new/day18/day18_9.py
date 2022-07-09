@@ -12,7 +12,7 @@ def dot_painting():
     bella.end_fill()
     bella.left(2)
 bella=Turtle()
-
+print(bella)
 bella.color("purple")
 print(bella)
 bella.pensize(0.5)

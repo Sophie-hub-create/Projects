@@ -131,3 +131,17 @@ join Tarif on Tarif.VertragFK = Vertrag.VertragID
 where 
 Adresse.Strasse = 'Parkstrasse'
 and Adresse.Hausnummer = '11a';
+
+---Gesamtrechung noch ergaenzen!!!
+
+update Rechnungsposition
+Betrag = 2500 * (Select KostenProEinheit from Tarif
+ where TarifID = Rechnungsposition.TarifFK)
+where (TarifFK, RechnungFK) in 
+(Select Tarif.TarifID, Rechnung.RechnungID from Vertrag 
+join Adresse on Vertrag.AdresseFK = Adresse.AdressID
+join Rechnung on Rechnung.VertragFK = Vertrag.VertragID
+join Tarif on Tarif.VertragFK = Vertrag.VertragID
+where 
+Adresse.Strasse = 'Parkstrasse'
+and Adresse.Hausnummer = '11a');
