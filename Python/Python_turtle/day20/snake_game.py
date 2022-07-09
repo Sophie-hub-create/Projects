@@ -11,6 +11,7 @@ screen.tracer(0)
 start_positions =[(0,0), (-20,0), (-40,0)]
 segments=[]
 
+#creating snake
 for positions in start_positions:
     new_segment=Turtle('square')
     new_segment.color('white')
@@ -19,13 +20,16 @@ for positions in start_positions:
     segments.append(new_segment)
     screen.update()
     
+#moving snake   
 game_is_on=True
 
 while game_is_on:
     time.sleep(0.1)
-    for segment in segments:
-        segment.forward(20)
-        
+    for segm_num in range(len(segments) -1, 0 , -1):          #start, stop, step
+        new_x = segments[segm_num -1].xcor()
+        new_y = segments[segm_num -1].ycor()
+        segments[segm_num].goto(new_x,new_y)
+    segments[0].forward(20)
     screen.update()
 
 
